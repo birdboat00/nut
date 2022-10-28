@@ -69,9 +69,9 @@ TEST_CASE("id", "[id]") {
     REQUIRE(id2.full() == "nut:id2");
     REQUIRE(id3.full() == "nut:id3/sub");
 
-    REQUIRE(id1.filepath() == "nut/id1");
-    REQUIRE(id2.filepath() == "nut/id2");
-    REQUIRE(id3.filepath() == "nut/id3/sub");
+    REQUIRE(id1.as_filepath() == "nut/id1");
+    REQUIRE(id2.as_filepath() == "nut/id2");
+    REQUIRE(id3.as_filepath() == "nut/id3/sub");
   }
 
   SECTION("tags") {
@@ -91,8 +91,8 @@ TEST_CASE("id", "[id]") {
     REQUIRE(idt2.full() == "#nut:idt2");
     REQUIRE(idt3.full() == "#nut:idt3/sub");
 
-    REQUIRE(idt1.filepath() == "nut/idt1");
-    REQUIRE(idt2.filepath() == "nut/idt2");
-    REQUIRE(idt3.filepath() == "nut/idt3/sub");
+    REQUIRE(idt1.as_filepath() == "nut/idt1");
+    REQUIRE(idt2.as_filepath() == "nut/idt2");
+    REQUIRE(idt3.as_filepath() == "nut/idt3/sub");
   }
 }
