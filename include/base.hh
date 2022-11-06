@@ -85,4 +85,10 @@ namespace nut {
     b = !b;
     return b;
   }
+
+  // std::to_underlying port until C++23 is released
+  template<typename E>
+  constexpr auto to_underlying(E value) noexcept -> std::underlying_type_t<E> {
+    return static_cast<std::underlying_type_t<E>>(value);
+  }
 }

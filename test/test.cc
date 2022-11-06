@@ -25,6 +25,7 @@ struct size_of_test_struct {
 static bool toggle_bool_test_bool = false;
 
 const std::array<nut::i32, 5> array_byte_size_test_array = { 1, 2, 3, 4, 5 };
+enum class underlying_test_enum : nut::u32 { a = 0, b = 10, c = 20 };
 
 TEST_CASE("utility functions", "[utility]") {
   SECTION("size_of<T>") {
@@ -41,6 +42,11 @@ TEST_CASE("utility functions", "[utility]") {
   SECTION("toggle bool", "[toggle-bool]") {
     REQUIRE(nut::toggle_bool(toggle_bool_test_bool) == true);
     REQUIRE(toggle_bool_test_bool == true);
+  }
+
+  SECTION("to_underlying" "[to-underlying]") {
+    REQUIRE(nut::to_underlying(underlying_test_enum::a) == static_cast<nut::u32>(underlying_test_enum::a));
+    REQUIRE(std::is_same_v<nut::u32, decltype(nut::to_underlying(underlying_test_enum::a))>);
   }
 }
 
