@@ -1,5 +1,7 @@
 #pragma once
 
+#include <filesystem>
+
 #include "base.hh"
 
 namespace nut {
@@ -24,7 +26,8 @@ namespace nut {
     inline auto path() const -> str { return _path; }
     inline auto tag() const -> bool { return _tag; }
     
-    inline auto as_filepath() const -> str { return std::format("{}/{}", _ns, _path); }
+    inline auto as_filepath_str() const -> str { return std::format("{}/{}", _ns, _path); }
+    inline auto as_filepath() const -> std::filesystem::path { return std::filesystem::path(std::format("{}/{}", _ns, _path)); }
 
     auto operator==(const id& other) const -> bool {
       return _ns == other._ns && _path == other._path;

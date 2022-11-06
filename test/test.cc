@@ -2,6 +2,8 @@
 
 #include <nut.hh>
 
+// TODO: I really have no idea on how to write unit tests
+
 TEST_CASE("types", "[types]") {
   REQUIRE(sizeof(nut::u8) == 1);
   REQUIRE(sizeof(nut::i8) == 1);
@@ -75,9 +77,13 @@ TEST_CASE("id", "[id]") {
     REQUIRE(id2.full() == "nut:id2");
     REQUIRE(id3.full() == "nut:id3/sub");
 
-    REQUIRE(id1.as_filepath() == "nut/id1");
-    REQUIRE(id2.as_filepath() == "nut/id2");
-    REQUIRE(id3.as_filepath() == "nut/id3/sub");
+    REQUIRE(id1.as_filepath_str() == "nut/id1");
+    REQUIRE(id2.as_filepath_str() == "nut/id2");
+    REQUIRE(id3.as_filepath_str() == "nut/id3/sub");
+
+    REQUIRE(id1.as_filepath() == std::filesystem::path(id1.as_filepath_str()));
+    REQUIRE(id2.as_filepath() == std::filesystem::path(id2.as_filepath_str()));
+    REQUIRE(id3.as_filepath() == std::filesystem::path(id3.as_filepath_str()));
   }
 
   SECTION("tags") {
@@ -97,8 +103,8 @@ TEST_CASE("id", "[id]") {
     REQUIRE(idt2.full() == "#nut:idt2");
     REQUIRE(idt3.full() == "#nut:idt3/sub");
 
-    REQUIRE(idt1.as_filepath() == "nut/idt1");
-    REQUIRE(idt2.as_filepath() == "nut/idt2");
-    REQUIRE(idt3.as_filepath() == "nut/idt3/sub");
+    REQUIRE(idt1.as_filepath_str() == "nut/idt1");
+    REQUIRE(idt2.as_filepath_str() == "nut/idt2");
+    REQUIRE(idt3.as_filepath_str() == "nut/idt3/sub");
   }
 }
